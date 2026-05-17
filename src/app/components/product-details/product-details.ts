@@ -1,6 +1,6 @@
 import { Component, inject, OnInit, PLATFORM_ID, Inject, ChangeDetectorRef, NgZone } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ProductService } from '../../services/product';
 import { OrderService } from '../../services/order';
 import { AuthService } from '../../services/auth';
@@ -11,7 +11,7 @@ import { loadStripe } from '@stripe/stripe-js';
 @Component({
   selector: 'app-product-details',
   standalone: true,
-  imports: [CommonModule, RouterLink, FormsModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './product-details.html',
   styleUrls: ['./product-details.css']
 })
