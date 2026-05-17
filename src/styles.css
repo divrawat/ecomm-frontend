@@ -1,0 +1,65 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --primary: #ffd814;
+  --primary-hover: #f7ca00;
+  --bg-gradient: #eaeded;
+  --card-bg: #ffffff;
+  --text-main: #0f1111;
+  --text-muted: #565959;
+  --error: #cc0c39;
+  --input-bg: #ffffff;
+  --input-border: #888c8c;
+  --input-focus: #e77600;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg-gradient);
+  background-attachment: fixed;
+  color: var(--text-main);
+  min-height: 100vh;
+}
+
+a {
+  text-decoration: none;
+  color: var(--primary);
+  transition: color 0.2s;
+}
+
+a:hover {
+  color: var(--primary-hover);
+}
+
+/* Toastr Styles */
+@import 'ngx-toastr/toastr';
+
+.toast-container .ngx-toastr {
+  border-radius: 12px !important;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -2px rgba(0, 0, 0, 0.2) !important;
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  font-family: 'Inter', sans-serif !important;
+}
+
+.toast-success {
+  background-color: rgba(16, 185, 129, 0.9) !important;
+}
+
+.toast-error {
+  background-color: rgba(239, 68, 68, 0.9) !important;
+}
+
+.toast-warning {
+  background-color: rgba(245, 158, 11, 0.9) !important;
+}
+
+.toast-info {
+  background-color: rgba(59, 130, 246, 0.9) !important;
+}

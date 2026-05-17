@@ -1,0 +1,48 @@
+<nav class="navbar" *ngIf="router.url !== '/dashboard'">
+  <div class="nav-container">
+    <div class="logo" routerLink="/">ECOMMERCE</div>
+    <div class="search-bar">
+      <input type="text" placeholder="Search products..." [(ngModel)]="searchQuery" (keyup.enter)="onSearch()">
+      <button *ngIf="searchQuery" class="clear-btn" (click)="searchQuery=''; onSearch()">×</button>
+      <button class="search-btn" (click)="onSearch()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+      </button>
+    </div>
+    <div class="nav-links">
+      <ng-container *ngIf="!(currentUser$ | async)">
+        <a routerLink="/login" class="nav-item">Sign In</a>
+      </ng-container>
+
+      <ng-container *ngIf="currentUser$ | async as user">
+        <div class="user-profile" (click)="toggleProfileMenu()">
+          <div class="user-avatar">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+          </div>
+          <div class="profile-dropdown" *ngIf="showProfileMenu">
+            <div class="user-info">
+              <span class="user-name">{{user.username}}</span>
+              <span class="user-email">{{user.email}}</span>
+            </div>
+            <hr>
+            <a routerLink="/dashboard" class="dropdown-item">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+              Dashboard
+            </a>
+            <hr>
+            <button (click)="logout()" class="dropdown-item logout-btn">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+              Logout
+            </button>
+          </div>
+        </div>
+      </ng-container>
+
+      <div class="cart">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+        <span class="cart-count">0</span>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<router-outlet></router-outlet>

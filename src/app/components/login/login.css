@@ -1,0 +1,22 @@
+.auth-container { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 2rem; background: #eaeded; }
+.auth-card { background: #ffffff; border: 1px solid #d5d9d9; border-radius: 8px; padding: 3rem; width: 100%; max-width: 450px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+.auth-header { text-align: center; margin-bottom: 2.5rem; }
+.auth-header h1 { font-size: 2rem; font-weight: 500; margin-bottom: 0.5rem; color: #0f1111; }
+.auth-header p { color: #565959; font-size: 0.95rem; }
+.auth-form { display: flex; flex-direction: column; gap: 1.5rem; }
+.form-group { display: flex; flex-direction: column; gap: 0.5rem; }
+.form-group label { font-size: 0.9rem; font-weight: 500; color: #0f1111; margin-left: 0.25rem; }
+.input-wrapper { position: relative; }
+.input-wrapper input { width: 100%; background: #ffffff; border: 1px solid #888c8c; border-radius: 4px; padding: 0.75rem 1rem; color: #0f1111; font-family: inherit; font-size: 1rem; transition: all 0.2s; }
+.input-wrapper input:focus { outline: none; border-color: #e77600; box-shadow: 0 0 0 3px rgba(231,118,0,0.2); }
+.toggle-password { position: absolute; right: 0.75rem; top: 50%; transform: translateY(-50%); background: none; border: none; color: #565959; cursor: pointer; padding: 0.25rem; }
+.input-wrapper input::placeholder { color: #565959; }
+.error-text { color: #cc0c39; font-size: 0.75rem; margin-top: 0.25rem; }
+.server-error { background: #fdf4e5; border: 1px solid #f3d09e; color: #c45500; padding: 0.75rem; border-radius: 4px; font-size: 0.875rem; text-align: center; }
+.auth-button { background: #ffd814; color: #0f1111; border: 1px solid #fcd200; border-radius: 4px; padding: 0.875rem; font-size: 1rem; font-weight: 500; cursor: pointer; box-shadow: 0 2px 5px rgba(213,217,217,0.5); display: flex; align-items: center; justify-content: center; margin-top: 1rem; }
+.auth-button:hover:not(:disabled) { background: #f7ca00; border-color: #f2c200; }
+.auth-button:disabled { opacity: 0.6; cursor: not-allowed; }
+.auth-footer { margin-top: 2rem; text-align: center; font-size: 0.875rem; color: #565959; }
+.auth-footer a { margin-left: 0.5rem; font-weight: 600; color: #007185; }
+.loader { width: 20px; height: 20px; border: 2px solid rgba(0,0,0,0.1); border-radius: 50%; border-top-color: #000; animation: spin 0.8s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }

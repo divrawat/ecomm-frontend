@@ -1,0 +1,97 @@
+<main class="details-container" *ngIf="product; else loadingState">
+  <div class="product-header">
+    <div class="image-gallery">
+      <div class="main-image" [style.background-image]="getDisplayedImage() ? 'url(' + getDisplayedImage() + ')' : 'none'">
+        <div class="no-image-large" *ngIf="!getDisplayedImage()">
+          <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="placeholder-icon"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"></rect><circle cx="9" cy="9" r="2"></circle><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"></path></svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-actions">
+      <div class="badge" *ngIf="product.isActive">In Stock</div>
+      <div class="badge out-of-stock" *ngIf="!product.isActive">Out of Stock</div>
+      
+      <h1>{{product.name}}</h1>
+      <div class="price-tag">${{product.price}}</div>
+      
+      <p class="description">{{product.description}}</p>
+
+      <div class="variants-section" *ngIf="product.variants && product.variants.length > 0">
+        <h3>Available Variants</h3>
+        <div class="variants-grid">
+          <div class="variant-chip" *ngFor="let v of product.variants" [class.selected]="selectedVariant === v" (click)="selectedVariant = v">
+            <span class="v-color" [style.background-color]="v.color"></span>
+            <span class="v-text">{{v.size}} - {{v.color}}</span>
+            <span class="v-stock">({{v.stock}} left)</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="purchase-controls">
+        <div class="qty-selector">
+          <button (click)="qty = qty > 1 ? qty - 1 : 1">-</button>
+          <span>{{qty}}</span>
+          <button (click)="qty = qty + 1">+</button>
+        </div>
+        <button class="buy-btn" (click)="buyNow()" [disabled]="!product.isActive">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+          Buy with Stripe
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <section class="reviews-section">
+    <div class="reviews-header">
+      <h2>Customer Reviews</h2>
+      <div class="avg-rating" *ngIf="product.reviews?.length">
+          <span class="stars">★★★★★</span>
+          <span>({{product.reviews.length}} reviews)</span>
+      </div>
+    </div>
+
+    <div class="reviews-list">
+      <div class="review-card" *ngFor="let r of product.reviews">
+        <div class="review-user">
+          <div class="avatar">{{r.username.charAt(0)}}</div>
+          <div class="user-meta">
+            <span class="username">{{r.username}}</span>
+            <span class="date">{{r.createdAt | date:'mediumDate'}}</span>
+          </div>
+        </div>
+        <div class="review-rating">
+            <span class="stars">
+              <ng-container *ngFor="let i of [1,2,3,4,5]">
+                <ng-container *ngIf="i <= r.rating">★</ng-container>
+                <ng-container *ngIf="i > r.rating">☆</ng-container>
+              </ng-container>
+            </span>
+        </div>
+        <p class="comment">{{r.comment}}</p>
+      </div>
+
+      <div class="empty-reviews" *ngIf="!product.reviews?.length">
+        <p>No reviews yet. Be the first to review this product!</p>
+      </div>
+    </div>
+
+    <div class="add-review" *ngIf="currentUser$ | async">
+        <h3>Add a Review</h3>
+        <div class="rating-input">
+            <span *ngFor="let i of [1,2,3,4,5]" (click)="newReview.rating = i" [class.active]="newReview.rating >= i">★</span>
+        </div>
+        <textarea [(ngModel)]="newReview.comment" placeholder="Share your experience..."></textarea>
+        <button (click)="submitReview()" [disabled]="!newReview.comment || !newReview.rating || isPostingReview">
+          {{ isPostingReview ? 'Posting...' : 'Post Review' }}
+        </button>
+    </div>
+  </section>
+</main>
+
+<ng-template #loadingState>
+  <div class="loading-container">
+    <div class="spinner"></div>
+    <p>Loading premium details...</p>
+  </div>
+</ng-template>
